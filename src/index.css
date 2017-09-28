@@ -3,11 +3,13 @@ html, body {
 }
 
 body {
+  background: #838790;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
 #root {
+  
   height: 100%;
 }

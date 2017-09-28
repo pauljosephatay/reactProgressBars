@@ -30,6 +30,7 @@
 
 .App__Loader {
   background-color: #666a72;
+  box-sizing: border-box;
   color: white;
   max-width: 680px;
   margin: auto;
