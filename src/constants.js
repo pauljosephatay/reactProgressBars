@@ -1,1 +1,1 @@
-export const END_POINT = 'http://pb-api.herokuapp.com/bars'
+export const END_POINT = '//pb-api.herokuapp.com/bars'
