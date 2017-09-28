@@ -1,49 +1,53 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import ProgressBarButton from '../progressbar/button/progressbar-button'
-import { updateProgressBar, setActiveProgressBar } from '../../redux/actions'
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ProgressBarButton from "../progressbar/button/progressbar-button";
+import { updateProgressBar, setActiveProgressBar } from "../../redux/actions";
 
-import Select from 'react-select'
-import 'react-select/dist/react-select.css';
+import Select from "react-select";
+import "react-select/dist/react-select.css";
 
-import './buttons.css'
+import "./buttons.css";
 
-export const Buttons = ({ buttons = [], 
+export const Buttons = ({
+  buttons = [],
   activeProgressBarIndex = 0,
   barsLength,
   limit,
   onButtonClick,
-  onSelect }) => {
-  
-  let clickHandler = (value) => {
+  onSelect
+}) => {
+  let clickHandler = value => {
     return () => {
-      onButtonClick( activeProgressBarIndex, value ) 
-    }
-  }
+      onButtonClick(activeProgressBarIndex, value);
+    };
+  };
 
-  let selectOptions = [...Array(barsLength).keys()].map( ( index ) => {
-    return { value: index, label: `Progress Bar ${index+1}`, clearableValue: false }
+  let selectOptions = [...Array(barsLength).keys()].map(index => {
+    return {
+      value: index,
+      label: `Progress Bar ${index + 1}`,
+      clearableValue: false
+    };
   });
 
-
-  let selectHandler = ( option ) => {
-    onSelect(option.value)
-  }
-
+  let selectHandler = option => {
+    onSelect(option.value);
+  };
 
   return (
-  <div>
-    <div className="Buttons">
-    <div className="Buttons__Select">
-      <Select 
-        options={selectOptions}
-        onChange={selectHandler}
-        clearable={false}
-        value={activeProgressBarIndex} />
-    </div>
-    {( buttons.map( (value, index) => {
-      /*
+    <div>
+      <div className="Buttons">
+        <div className="Buttons__Select">
+          <Select
+            options={selectOptions}
+            onChange={selectHandler}
+            clearable={false}
+            value={activeProgressBarIndex}
+          />
+        </div>
+        {buttons.map((value, index) => {
+          /*
       I believe its appropriate to normalise the button value displayed so that visual change more or less
       depict the user's intent. However as given in the breakdown-"The amount of buttons to display 
       and what value they increment or decrement the selected bar",
@@ -51,22 +55,25 @@ export const Buttons = ({ buttons = [],
       let normalizedValue = value/limit*100
       normalizedValue = Math.round(normalizedValue)
       */
-      return (
-          <ProgressBarButton className="Buttons__Button"
-            key={index} value={value}  onClick={ clickHandler( value ) }/>
-        )}) )}
+          return (
+            <ProgressBarButton
+              className="Buttons__Button"
+              key={index}
+              value={value}
+              onClick={clickHandler(value)}
+            />
+          );
+        })}
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
 Buttons.propTypes = {
   barsLength: PropTypes.number,
   buttons: PropTypes.array,
   activeProgressBarIndex: PropTypes.number
-}
-
-
+};
 
 const mapStateToProps = state => {
   return {
@@ -74,18 +81,18 @@ const mapStateToProps = state => {
     buttons: state.buttons,
     activeProgressBarIndex: state.activeProgressBarIndex,
     limit: state.limit
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onButtonClick: (index, value ) => {
-      dispatch(updateProgressBar({ index, value }))
+    onButtonClick: (index, value) => {
+      dispatch(updateProgressBar({ index, value }));
     },
-    onSelect: ( index ) => {
-      dispatch(setActiveProgressBar(index))
+    onSelect: index => {
+      dispatch(setActiveProgressBar(index));
     }
-  }
-}
+  };
+};
 
-export default connect( mapStateToProps, mapDispatchToProps )(Buttons)
+export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
