@@ -1,0 +1,31 @@
+.Button {
+  background-color: #70747d; 
+  border: 1px solid #7f838d;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  min-width: 60px;
+}
+
+.Button:hover {
+  background-color: #444444;
+}
+
+.Button:focus {
+  outline: none;
+}
+
+@media all and (max-width: 480px) { 
+    .Button {
+      width: 100%
+    }
+}

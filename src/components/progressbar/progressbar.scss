@@ -1,0 +1,39 @@
+.bar {
+  
+  position: relative;
+  background-color: #6f737c;
+
+}
+
+.bar__progress {
+ 
+  background-color: #a6bc7c;
+  height: 100%;
+  position: absolute;
+  overflow: visible;
+
+  transition: width 0.3s ease-out;
+}
+
+.bar__text {
+  color: #ffffff;
+  padding: 5px 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.bar__progress--overloaded {
+  background-color: #cc230d;
+  animation: overload 0.4s ease-out;
+}  
+
+
+@keyframes overload {
+    0%   {background-color: #a6bc7c;}
+    90%  {background-color: #fe6d5a;}
+    100% {background-color: #cc230d;}
+}
+
+
+

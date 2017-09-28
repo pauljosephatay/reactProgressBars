@@ -5,8 +5,11 @@ describe('progress bar reducer', () => {
 
   const initialState = {
       activeProgressBarIndex: 0,
-      progressBars: [22,78,75],
-      buttons:[5,38,-22,-23]
+      progressBars: [],
+      buttons:[],
+      limit: 120,
+      isLoading: true,
+      hasErrorLoading: false
   }
 
   it('should return the initial state', () => {
@@ -21,11 +24,10 @@ describe('progress bar reducer', () => {
         type: types.SET_ACTIVE_PROGRESS_BAR,
         index: 1
       })
-    ).toEqual({
-      activeProgressBarIndex: 1,
-      progressBars: [22,78,75],
-      buttons:[5,38,-22,-23]
-    })
+    ).toEqual(Object.assign(
+        {},
+        initialState,
+        { activeProgressBarIndex: 1 }))
 
     expect(
       reducer(
@@ -35,42 +37,71 @@ describe('progress bar reducer', () => {
           index: 2
         }
       )
-    ).toEqual({
-          activeProgressBarIndex: 2,
-          progressBars: [22,78,75],
-          buttons:[5,38,-22,-23]
-        })
+    ).toEqual(Object.assign(
+        {},
+        initialState,
+        { activeProgressBarIndex: 2 }))
   })
 
 
 
-  it('should handle SET_PROGRESS_BAR', () => {
+  it('should handle UPDATE_PROGRESS_BAR', () => {
     expect(
-      reducer(initialState, {
-        type: types.SET_PROGRESS_BAR,
+      reducer({
+        ...initialState,
+        progressBars: [0,0,20]
+      }, {
+        type: types.UPDATE_PROGRESS_BAR,
         index: 1,
-        value: 50
+        value: 5
       })
     ).toEqual({
-      activeProgressBarIndex: 0,
-      progressBars: [22,50,75],
-      buttons:[5,38,-22,-23]
-    })
+        ...initialState,
+        progressBars: [0,5,20]
+      })
 
     expect(
-      reducer(
-        initialState,
+      reducer({
+        ...initialState,
+        progressBars: [0,0,20]
+      },
         {
-          type: types.SET_PROGRESS_BAR,
+          type: types.UPDATE_PROGRESS_BAR,
           index: 2,
-          value: 120
+          value: -10
         }
       )
     ).toEqual({
-          activeProgressBarIndex: 0,
-          progressBars: [22,78,120],
-          buttons:[5,38,-22,-23]
+        ...initialState,
+        progressBars: [0,0,10]
+      })
+  })
+
+
+  it('Should handle SUCCESS_LOADING_BARS', () => {
+    expect(
+      reducer({
+          ...initialState,
+          progressBars: [0,0,20],
+          buttons: [0,0,0],
+          limit: 100
+        },
+          {
+            type: types.SUCCESS_LOADING_BARS,
+            data: {
+              bars: [0,0,10],
+              buttons: [0,0,-20],
+              limit: 200
+            }
+          }
+        )
+      ).toEqual({
+          ...initialState,
+          progressBars: [0,0,10],
+          buttons: [0,0,-20],
+          limit: 200
         })
   })
+  
 
 })

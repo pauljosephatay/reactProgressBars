@@ -3,15 +3,19 @@ import { shallow } from 'enzyme';
 import Button from './button';
 
 describe('button component', () => {
+
+
+
   it('Should render successfully', () => {
-    const component = shallow(<Button children="Button" />);
+    let fn = ()=>{}
+    const component = shallow(<Button label="Button" onClick={fn}/>);
     expect(component.exists()).toEqual(true);
   });
 
-  it('Should render children successfully', () => {
+  it('Should render label successfully', () => {
     const label = "Button";
-
-    const component = shallow(<Button children={label} />);
+    let fn = ()=>{}
+    const component = shallow(<Button label={label} onClick={fn}/>);
     expect(component.text()).toEqual(label);
   });
 
@@ -23,7 +27,7 @@ describe('button component', () => {
       state = true;
     }
 
-    const component = shallow(<Button children="Button" onClick={fn} />);
+    const component = shallow(<Button label="Button" onClick={fn} />);
     component.find('button').simulate('click', { preventDefault() {} });
     expect(state).toEqual(true);
   });
