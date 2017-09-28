@@ -2,10 +2,10 @@
 
 Published at https://pauljosephatay.github.io/reactProgressBars/
 
-This application showcase progress bars which can be updated using the buttons. The select a progressbar to update
-change the value of the the select/dropdown control. Changes on the progress bar is animated and when the progress
-is over 100% the bar's color changes to dark red with a subtle glow effect. This is also responsive to different sizes. Number of progress bars and buttons are dynamic. These are fetch from an endpoint in herokuapp. This small app
-demonstrates production development using Git version control.
+This application showcase progress bars which can be updated using the buttons. To select a progressbar to update,
+change the value of the select/dropdown control. Changes on the progress bar is animated and when the progress
+is over 100%, the bar's color changes to dark red with a subtle glow effect. This is also responsive to different sizes. Number of progress bars and buttons are dynamic. These are fetch from an endpoint in herokuapp. This small app
+demonstrates production quality app with Git version control.
 
 - This app is built with react redux in ES6 syntax features through TDD methodology.
 - Unit testing is done with jest and enzyme. For async functions like in thunk, mockstore and nock is utilized.
